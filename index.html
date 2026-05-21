@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Habits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+        <div class="brand">
+          <span class="brand-leaf">&#9752;</span>
+          <div>
+            <h1>Habits</h1>
+            <p class="brand-sub">your daily practice</p>
+          </div>
+        </div>
+        <div class="stats-panel">
+          <div class="stat-card">
+            <span class="stat-label">habits</span>
+            <span class="stat-value" id="statTotal">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">done today</span>
+            <span class="stat-value" id="statToday">0</span>
+          </div>
+          <div class="stat-card accent-card">
+            <span class="stat-label">best streak</span>
+            <span class="stat-value" id="statBestStreak">0</span>
+          </div>
+        </div>
+        <div class="ring-section">
+          <p class="ring-label">this week</p>
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 80 80">
+              <circle class="ring-bg" cx="40" cy="40" r="32" />
+              <circle
+                class="ring-fg"
+                id="ringFg"
+                cx="40"
+                cy="40"
+                r="32"
+                stroke-dasharray="0 201"
+                stroke-dashoffset="50"
+              />
+            </svg>
+            <div class="ring-pct" id="ringPct">0%</div>
+          </div>
+          <p class="ring-sub" id="ringSub">0 of 0 completed</p>
+        </div>
+        <div class="cat-legend" id="catLegend"></div>
+        <nav class="sidebar-nav">
+          <button
+            class="snav-btn active"
+            data-view="tracker"
+            onclick="switchView('tracker')"
+          >
+            &#9783; Tracker
+          </button>
+          <button
+            class="snav-btn"
+            data-view="analytics"
+            onclick="switchView('analytics')"
+          >
+            &#9641; Analytics
+          </button>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="view active" id="view-tracker">
+        <div class="main-header">
+          <div class="week-nav">
+            <button class="nav-btn" id="prevWeek">&#8592;</button>
+            <span class="week-label" id="weekLabel"></span>
+            <button class="nav-btn" id="nextWeek">&#8594;</button>
+            <button class="nav-btn pill-btn" id="todayBtn">Today</button>
+          </div>
+        </div>
+        <div class="add-card">
+          <div class="add-fields">
+            <input
+              id="habitInput"
+              type="text"
+              placeholder="New habit name…"
+              maxlength="60"
+            />
+            <select id="habitCategory">
+              <option value="none">No category</option>
+              <option value="health">Health</option>
+              <option value="mind">Mind</option>
+              <option value="body">Body</option>
+              <option value="social">Social</option>
+              <option value="creative">Creative</option>
+              <option value="work">Work</option>
+            </select>
+          </div>
+          <button class="add-btn" id="addHabit">+ Add Habit</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead id="tableHead"></thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+          <div class="empty hidden" id="emptyState">
+            <div class="empty-icon">&#9752;</div>
+            <h2>No habits yet</h2>
+            <p>Add your first habit above to begin your streak.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-analytics">
+        <div class="analytics-grid" id="analyticsGrid"></div>
+      </section>
+    </main>
+
+    <div class="modal-overlay hidden" id="modalOverlay">
+      <div class="modal-box">
+        <button class="modal-close" id="modalCloseBtn">&times;</button>
+        <h3 class="modal-title" id="modalTitle">Log entry</h3>
+        <p class="modal-date" id="modalDate"></p>
+        <div class="mood-row">
+          <span class="mood-label">Mood</span>
+          <div class="mood-options">
+            <button class="mood-btn" data-mood="1" title="Rough">
+              &#128546;
+            </button>
+            <button class="mood-btn" data-mood="2" title="Meh">
+              &#128528;
+            </button>
+            <button class="mood-btn" data-mood="3" title="Okay">
+              &#128512;
+            </button>
+            <button class="mood-btn" data-mood="4" title="Good">
+              &#129321;
+            </button>
+            <button class="mood-btn" data-mood="5" title="Amazing">
+              &#129395;
+            </button>
+          </div>
+        </div>
+        <textarea
+          id="noteInput"
+          placeholder="Any notes for today? (optional)"
+          maxlength="280"
+        ></textarea>
+        <div class="modal-footer">
+          <span class="note-chars" id="noteChars">0 / 280</span>
+          <button class="save-btn" id="saveNote">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
