@@ -49,6 +49,9 @@ body {
   display: flex;
   min-height: 100vh;
 }
+.menu-toggle {
+  display: none;
+}
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
